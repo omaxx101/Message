@@ -16,59 +16,63 @@
 
   .envelope {
     position: relative;
-    width: 200px;
-    height: 120px;
+    width: 220px;
+    height: 140px;
     background: #fff;
     border: 2px solid #333;
     border-radius: 5px;
     cursor: pointer;
-    overflow: hidden;
-    transition: all 0.5s ease;
+    perspective: 600px;
   }
 
-  .envelope::before {
-    content: '';
+  /* Flap */
+  .flap {
     position: absolute;
-    width: 0;
-    height: 0;
+    width: 100%;
+    height: 70px;
+    background: #eee;
     top: 0;
     left: 0;
-    border-left: 100px solid transparent;
-    border-right: 100px solid transparent;
-    border-bottom: 60px solid #fff;
-    transition: all 0.5s ease;
+    transform-origin: top center;
+    transition: transform 0.6s ease;
     z-index: 2;
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
   }
 
-  .envelope.open::before {
-    transform: translateY(-60px) rotateX(180deg);
-  }
-
+  /* Letter inside */
   .letter {
     position: absolute;
-    top: 60px;
-    left: 0;
-    width: 100%;
-    height: 60px;
+    top: 70px;
+    left: 10px;
+    width: 200px;
+    height: 120px;
     background: #fffae3;
+    border: 1px solid #ccc;
     display: flex;
     justify-content: center;
     align-items: center;
     font-weight: bold;
     color: #333;
     transform: translateY(100%);
-    transition: transform 0.5s ease;
+    transition: transform 0.6s ease;
     z-index: 1;
+    border-radius: 3px;
+  }
+
+  /* Open state */
+  .envelope.open .flap {
+    transform: rotateX(180deg);
   }
 
   .envelope.open .letter {
-    transform: translateY(0);
+    transform: translateY(-60px);
   }
 </style>
 </head>
 <body>
 
 <div class="envelope" onclick="toggleEnvelope(this)">
+  <div class="flap"></div>
   <div class="letter">Hello! You have a message.</div>
 </div>
 
