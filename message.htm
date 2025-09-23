@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Interactive Envelope</title>
+<style>
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: #f0f0f0;
+    font-family: Arial, sans-serif;
+  }
+
+  .envelope {
+    position: relative;
+    width: 200px;
+    height: 120px;
+    background: #fff;
+    border: 2px solid #333;
+    border-radius: 5px;
+    cursor: pointer;
+    overflow: hidden;
+    transition: all 0.5s ease;
+  }
+
+  .envelope::before {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    top: 0;
+    left: 0;
+    border-left: 100px solid transparent;
+    border-right: 100px solid transparent;
+    border-bottom: 60px solid #fff;
+    transition: all 0.5s ease;
+    z-index: 2;
+  }
+
+  .envelope.open::before {
+    transform: translateY(-60px) rotateX(180deg);
+  }
+
+  .letter {
+    position: absolute;
+    top: 60px;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    background: #fffae3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    color: #333;
+    transform: translateY(100%);
+    transition: transform 0.5s ease;
+    z-index: 1;
+  }
+
+  .envelope.open .letter {
+    transform: translateY(0);
+  }
+</style>
+</head>
+<body>
+
+<div class="envelope" onclick="toggleEnvelope(this)">
+  <div class="letter">Hello! You have a message.</div>
+</div>
+
+<script>
+  function toggleEnvelope(el) {
+    el.classList.toggle('open');
+  }
+</script>
+
+</body>
+</html>
