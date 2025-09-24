@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,6 +19,11 @@ body{
   top: 50%;
   left: 50%;
   transform: translate(-50%,-50%);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  overflow: visible;
+  position: relative;
 }
 
 /* Envelope */
@@ -36,11 +40,11 @@ body{
   transform: translate(-50%, -50%);
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-end;
+  font-weight: 800;
+  font-size: 18px;
   color: #fff;
-  font-weight: bold;
-  font-size: 16px;
-  z-index: 2;
+  z-index: 10;
   transition: transform 0.6s ease, opacity 0.6s ease;
 }
 
@@ -54,25 +58,23 @@ body{
   background: #ff1a1a;
   transform-origin: top center;
   clip-path: polygon(0 0, 100% 0, 50% 100%);
-  z-index: 3;
+  z-index: 11;
   transition: transform 0.6s ease;
 }
 
-/* Roses and message (hidden initially) */
-.roses-container, .letter-message {
-  opacity: 0;
-  transition: opacity 1s ease;
+/* Rose */
+.roses-container{
+  position: relative;
 }
 
-/* Rose animation */
 .rose{
   width: 200px;
   height: 200px;
-  position: absolute;
-  right: 0;
   display: inline-block;
-  animation: yidon 5s infinite;
   transform: translateY(40%);
+  opacity: 0;
+  transition: opacity 0.8s ease;
+  position: relative;
 }
 
 .petal{
@@ -83,106 +85,26 @@ body{
   position: absolute;
   box-shadow: 0 0 10px #D1123F;
   z-index: 2;
-  transform-origin: bottom right; 
-  animation: zhankai2 10s infinite;
 }
 
-.petal:nth-child(2){
-  transform-origin: right bottom;
-  transform: rotate(90deg);
-  left: -10px;
-  animation: zhankai1 10s infinite;
-}
+.petal:nth-child(2){ transform: rotate(90deg); left: -10px; }
+.petal:nth-child(3){ width: 40px; height: 40px; left: 10px; top: -20px; background: #f03a64; }
+.petal:nth-child(4){ transform: rotate(90deg); width: 40px; height: 40px; left: 0; top: -20px; background: #f03a64; }
+.petal:nth-child(5){ width: 50px; height: 50px; border-radius: 20px; left: 20px; top: -30px; background: #d1123f; }
 
-.petal:nth-child(3){
-  width: 40px;
-  height: 40px;
-  left: 10px;
-  top: -20px;
-  z-index: 1;
-  background: #f03a64;
-  animation: zhankai2 10s infinite;
-}
+.leaf{ position: absolute; top: 120px; left: -115px; }
+.stem{ width: 240px; height: 40px; background: transparent; border: 8px solid #77a377; border-color: #77a377 transparent transparent transparent; border-radius: 50%; transform: rotate(100deg); }
+.leafs{ width: 50px; height: 40px; border-radius: 0px 50%; background: #77a377; position: absolute; top: 0; left: 100px; z-index: 49; }
+.leafs:nth-child(2){ width: 40px; height: 20px; top: 40px; left: 140px; transform: rotate(120deg); }
 
-.petal:nth-child(4){
-  transform: rotate(90deg);
-  width: 40px;
-  height: 40px;
-  left: 0px;
-  top: -20px;
-  z-index: 1;
-  background: #f03a64;
-  animation: zhankai1 10s infinite;
-}
-
-.petal:nth-child(5){
-  width: 50px;
-  height: 50px;
-  border-radius: 20px;
-  left: 20px;
-  top: -30px;
-  z-index: 0;
-  background: #d1123f;
-}
-
-.leaf{
-  position: absolute;
-  top: 120px;
-  left: -115px;
-}
-
-.stem{
-  width: 240px;
-  height: 40px;
-  background: transparent;
-  border: 8px solid #77a377;
-  border-color: #77a377 transparent transparent transparent;
-  border-radius: 50% 50%;
-  transform: rotate(100deg);
-}
-
-.leafs{
-  width: 50px;
-  height: 40px;
-  border-radius: 0px 50%;
-  background: #77a377;
-  position: absolute;
-  top: 0;
-  left: 100px;
-  z-index: 49;
-}
-
-.leafs:nth-child(2){
-  width: 40px;
-  height: 20px;
-  top: 40px;
-  left: 140px;
-  transform: rotate(120deg);
-}
-
+/* Letter message */
 .letter-message{
-  position: absolute;
-  top: 50px;
-  left: 50px;
-  width: 600px;
-  font-size: 34px;
+  font-size: 60px;
   color: #FE7696;
-}
-
-/* Keyframes */
-@keyframes yidon{
-  50%{ transform: translateY(35%);}
-  100%{ transform: translateY(40%);}
-}
-
-@keyframes zhankai1{
-  50%{ transform: rotate(110deg);}
-  100%{ transform: rotate(90deg);}
-}
-
-@keyframes zhankai2{
-  50%{ transform: rotate(-20deg);}
-  100%{ transform: rotate(0deg);}
+  max-width: 400px;
+  line-height: 1.2;
+  opacity: 0;
+  transition: opacity 0.8s ease;
 }
 
 /* Open envelope */
@@ -190,67 +112,47 @@ body{
   transform: scale(0);
   opacity: 0;
 }
-
-.envelope.open ~ .roses-container,
-.envelope.open ~ .letter-message{
-  opacity: 1;
-}
-
 </style>
 </head>
 <body>
 
 <div class="container">
+  <!-- Letter message on the left -->
+  <div class="letter-message">
+    <h1>Get Well Soon Twin</h1>
+  </div>
+
+  <!-- Rose on the right -->
+  <div class="roses-container">
+    <div class="rose">
+      <div class="flower">
+        <div class="petal"></div>
+        <div class="petal"></div>
+        <div class="petal"></div>
+        <div class="petal"></div>
+        <div class="petal"></div>
+      </div>
+      <div class="leaf">
+        <div class="stem"></div>
+        <div class="leafs"></div>
+        <div class="leafs"></div>
+      </div>
+    </div>
+  </div>
+
   <!-- Envelope -->
   <div class="envelope" onclick="openEnvelope(this)">
     <div class="flap"></div>
     Click To Open
-  </div>
-<!-- Roses container -->
-<div class="roses-container">
-  <!-- Right side rose -->
-
-  <div class="rose" style="right: 0;">
-    <div class="flower">
-      <div class="petal"></div>
-      <div class="petal"></div>
-      <div class="petal"></div>
-      <div class="petal"></div>
-      <div class="petal"></div>
-    </div>
-    <div class="leaf">
-      <div class="stem"></div>
-      <div class="leafs"></div>
-      <div class="leafs"></div>
-    </div>
-  </div>
-
-  <!-- Left side rose -->
-  <div class="rose" style="left: 0; transform: translateY(40%) scaleX(-1);">
-    <div class="flower">
-      <div class="petal"></div>
-      <div class="petal"></div>
-      <div class="petal"></div>
-      <div class="petal"></div>
-      <div class="petal"></div>
-    </div>
-    <div class="leaf">
-      <div class="stem"></div>
-      <div class="leafs"></div>
-      <div class="leafs"></div>
-    </div>
-  </div>
-
-
-  <!-- Message -->
-  <div class="letter-message">
-    <h1>Get Well Soon Twin</h1>
   </div>
 </div>
 
 <script>
 function openEnvelope(el){
   el.classList.add('open');
+  // show rose and message
+  document.querySelector('.rose').style.opacity = '1';
+  document.querySelector('.letter-message').style.opacity = '1';
 }
 </script>
 
