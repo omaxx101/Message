@@ -5,44 +5,43 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Get Well Soon Rose</title>
 <style>
-body{
+body {
   background: #fadede;
   font-family: 'Sacramento', cursive;
-  overflow: hidden;
+  overflow-x: hidden;
   margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 
-.container{
-  width: 800px;
-  height: 400px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%,-50%);
+/* Container flex layout */
+.container {
   display: flex;
-  align-items: center;
+  flex-direction: row;
   justify-content: space-between;
-  overflow: visible;
+  align-items: center;
+  width: 90%;
+  max-width: 800px;
   position: relative;
 }
 
 /* Envelope */
 .envelope {
   position: absolute;
-  width: 220px;
-  height: 140px;
+  width: 40%;
+  max-width: 220px;
+  aspect-ratio: 220/140;
   background: #b30000;
   border: 2px solid #800000;
   border-radius: 5px;
   cursor: pointer;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
   display: flex;
   justify-content: center;
   align-items: flex-end;
   font-weight: 800;
-  font-size: 18px;
+  font-size: 1.2rem;
   color: #fff;
   z-index: 10;
   transition: transform 0.6s ease, opacity 0.6s ease;
@@ -54,7 +53,7 @@ body{
   top: 0;
   left: 0;
   width: 100%;
-  height: 70px;
+  height: 50%;
   background: #ff1a1a;
   transform-origin: top center;
   clip-path: polygon(0 0, 100% 0, 50% 100%);
@@ -63,52 +62,54 @@ body{
 }
 
 /* Rose */
-.roses-container{
-  position: relative;
+.roses-container {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
 }
 
-.rose{
-  width: 200px;
-  height: 200px;
-  display: inline-block;
-  transform: translateY(40%);
+.rose {
+  width: 25vw;
+  max-width: 200px;
+  aspect-ratio: 1/1;
+  transform: translateY(0);
   opacity: 0;
   transition: opacity 0.8s ease;
   position: relative;
 }
 
-.petal{
-  width: 50px;
-  height: 50px;
+.petal {
+  width: 25%;
+  height: 25%;
   background: #fe7696;
   border-radius: 0px 50%;
   position: absolute;
-  box-shadow: 0 0 10px #D1123F;
+  box-shadow: 0 0 5px #D1123F;
   z-index: 2;
 }
 
-.petal:nth-child(2){ transform: rotate(90deg); left: -10px; }
-.petal:nth-child(3){ width: 40px; height: 40px; left: 10px; top: -20px; background: #f03a64; }
-.petal:nth-child(4){ transform: rotate(90deg); width: 40px; height: 40px; left: 0; top: -20px; background: #f03a64; }
-.petal:nth-child(5){ width: 50px; height: 50px; border-radius: 20px; left: 20px; top: -30px; background: #d1123f; }
+.petal:nth-child(2){ transform: rotate(90deg); left: -5%; }
+.petal:nth-child(3){ width: 20%; height: 20%; left: 5%; top: -10%; background: #f03a64; }
+.petal:nth-child(4){ transform: rotate(90deg); width: 20%; height: 20%; left: 0%; top: -10%; background: #f03a64; }
+.petal:nth-child(5){ width: 25%; height: 25%; border-radius: 20%; left: 10%; top: -15%; background: #d1123f; }
 
-.leaf{ position: absolute; top: 120px; left: -115px; }
-.stem{ width: 240px; height: 40px; background: transparent; border: 8px solid #77a377; border-color: #77a377 transparent transparent transparent; border-radius: 50%; transform: rotate(100deg); }
-.leafs{ width: 50px; height: 40px; border-radius: 0px 50%; background: #77a377; position: absolute; top: 0; left: 100px; z-index: 49; }
-.leafs:nth-child(2){ width: 40px; height: 20px; top: 40px; left: 140px; transform: rotate(120deg); }
+.leaf { position: absolute; top: 60%; left: -60%; }
+.stem { width: 120%; height: 20%; background: transparent; border: 4px solid #77a377; border-color: #77a377 transparent transparent transparent; border-radius: 50%; transform: rotate(100deg); }
+.leafs { width: 50%; height: 50%; border-radius: 0px 50%; background: #77a377; position: absolute; top: 0; left: 40%; z-index: 49; }
+.leafs:nth-child(2){ width: 40%; height: 20%; top: 40%; left: 60%; transform: rotate(120deg); }
 
 /* Letter message */
-.letter-message{
-  font-size: 60px;
+.letter-message {
+  font-size: 8vw;
+  max-width: 45%;
   color: #FE7696;
-  max-width: 400px;
   line-height: 1.2;
   opacity: 0;
   transition: opacity 0.8s ease;
 }
 
 /* Open envelope */
-.envelope.open{
+.envelope.open {
   transform: scale(0);
   opacity: 0;
 }
@@ -150,7 +151,6 @@ body{
 <script>
 function openEnvelope(el){
   el.classList.add('open');
-  // show rose and message
   document.querySelector('.rose').style.opacity = '1';
   document.querySelector('.letter-message').style.opacity = '1';
 }
