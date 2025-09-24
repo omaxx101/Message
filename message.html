@@ -8,30 +8,117 @@
 body {
   background: #fadede;
   font-family: 'Sacramento', cursive;
-  overflow-x: hidden;
   margin: 0;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
+  overflow-x: hidden;
 }
 
-/* Container flex layout */
+/* Container */
 .container {
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  width: 90%;
-  max-width: 800px;
+  width: 95%;
+  max-width: 400px; /* fits 6-inch screen */
   position: relative;
+}
+
+/* Letter message */
+.letter-message {
+  font-size: 6vw;
+  max-width: 90%;
+  color: #FE7696;
+  text-align: center;
+  line-height: 1.2;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+  margin-bottom: 15px;
+}
+
+/* Rose container */
+.roses-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  margin-bottom: 15px;
+  position: relative;
+}
+
+.rose {
+  width: 30vw;
+  max-width: 100px;
+  height: 100px;
+  opacity: 0;
+  position: relative;
+  transition: opacity 0.8s ease;
+}
+
+/* Rose petals */
+.flower {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.petal {
+  width: 50px;
+  height: 50px;
+  background: #fe7696;
+  border-radius: 0px 50%;
+  position: absolute;
+  box-shadow: 0 0 10px #D1123F;
+  z-index: 2;
+}
+
+.petal:nth-child(2){ transform: rotate(90deg); left: -10px; }
+.petal:nth-child(3){ width: 40px; height: 40px; left: 10px; top: -20px; background: #f03a64; }
+.petal:nth-child(4){ transform: rotate(90deg); width: 40px; height: 40px; left: 0; top: -20px; background: #f03a64; }
+.petal:nth-child(5){ width: 50px; height: 50px; border-radius: 20px; left: 20px; top: -30px; background: #d1123f; }
+
+/* Stem and leaves */
+.leaf{
+  position: absolute;
+  top: 70px;
+  left: -40px;
+}
+
+.stem{
+  width: 100px;
+  height: 10px;
+  background: transparent;
+  border: 4px solid #77a377;
+  border-color: #77a377 transparent transparent transparent;
+  border-radius: 50%;
+  transform: rotate(100deg);
+}
+
+.leafs{
+  width: 40px;
+  height: 25px;
+  border-radius: 0px 50%;
+  background: #77a377;
+  position: absolute;
+  top: 0;
+  left: 40%;
+  z-index: 49;
+}
+
+.leafs:nth-child(2){
+  width: 30px;
+  height: 15px;
+  top: 35%;
+  left: 55%;
+  transform: rotate(120deg);
 }
 
 /* Envelope */
 .envelope {
-  position: absolute;
-  width: 40%;
-  max-width: 220px;
+  width: 60%;
+  max-width: 200px;
   aspect-ratio: 220/140;
   background: #b30000;
   border: 2px solid #800000;
@@ -41,13 +128,15 @@ body {
   justify-content: center;
   align-items: flex-end;
   font-weight: 800;
-  font-size: 1.2rem;
+  font-size: 1rem;
   color: #fff;
   z-index: 10;
   transition: transform 0.6s ease, opacity 0.6s ease;
+  margin-top: 10px;
+  position: relative;
+  overflow: hidden;
 }
 
-/* Flap */
 .flap {
   position: absolute;
   top: 0;
@@ -58,105 +147,29 @@ body {
   transform-origin: top center;
   clip-path: polygon(0 0, 100% 0, 50% 100%);
   z-index: 11;
-  transition: transform 0.6s ease;
 }
 
-/* Rose */
-.roses-container {
-  flex: 1;
-  display: flex;
-  justify-content: flex-end;
-  position: relative;
-}
-
-.rose {
-  width: 25vw;
-  max-width: 200px;
-  aspect-ratio: 1/1;
-  transform: translateY(0);
-  opacity: 0;
-  transition: opacity 0.8s ease;
-  position: relative;
-}
-
-.petal {
-  width: 25%;
-  height: 25%;
-  background: #fe7696;
-  border-radius: 0px 50%;
-  position: absolute;
-  box-shadow: 0 0 5px #D1123F;
-  z-index: 2;
-}
-
-.petal:nth-child(2){ transform: rotate(90deg); left: -5%; }
-.petal:nth-child(3){ width: 20%; height: 20%; left: 5%; top: -10%; background: #f03a64; }
-.petal:nth-child(4){ transform: rotate(90deg); width: 20%; height: 20%; left: 0%; top: -10%; background: #f03a64; }
-.petal:nth-child(5){ width: 25%; height: 25%; border-radius: 20%; left: 10%; top: -15%; background: #d1123f; }
-
-.leaf { position: absolute; top: 60%; left: -60%; }
-.stem { width: 120%; height: 20%; background: transparent; border: 4px solid #77a377; border-color: #77a377 transparent transparent transparent; border-radius: 50%; transform: rotate(100deg); }
-.leafs { width: 50%; height: 50%; border-radius: 0px 50%; background: #77a377; position: absolute; top: 0; left: 40%; z-index: 49; }
-.leafs:nth-child(2){ width: 40%; height: 20%; top: 40%; left: 60%; transform: rotate(120deg); }
-
-/* Letter message */
-.letter-message {
-  font-size: 6vw; /* scaled down for mobile */
-  max-width: 40%;
-  color: #FE7696;
-  line-height: 1.2;
-  opacity: 0;
-  transition: opacity 0.8s ease;
-}
-
-/* Open envelope */
+/* Envelope open effect */
 .envelope.open {
-  transform: scale(0);
+  transform: scale(0.5) translateY(-30px);
   opacity: 0;
 }
 
-/* Mobile adjustments */
-@media only screen and (max-width: 480px) {
-  .container {
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .letter-message {
-    font-size: 8vw; /* smaller font for small screens */
-    max-width: 90%; 
-    text-align: center;
-    margin-bottom: 15px;
-  }
-
-  .roses-container {
-    justify-content: center;
-    margin-top: 10px;
-  }
-
-  .rose {
-    width: 35vw;
-    max-width: 120px; /* smaller rose for mobile */
-  }
-
-  .envelope {
-    width: 50%;
-    max-width: 150px;
-    font-size: 0.9rem;
-  }
+/* Responsive text for very small screens */
+@media only screen and (max-width: 360px) {
+  .letter-message { font-size: 7vw; }
+  .rose { width: 40vw; max-width: 80px; height: 80px; }
+  .envelope { width: 70%; max-width: 160px; }
 }
 </style>
 </head>
 <body>
 
 <div class="container">
-  <!-- Letter message on the left -->
   <div class="letter-message">
-    <h1>Get Well Soon Twin</h1>
+    <h1>Get Well Soon</h1>
   </div>
 
-  <!-- Rose on the right -->
   <div class="roses-container">
     <div class="rose">
       <div class="flower">
@@ -174,7 +187,6 @@ body {
     </div>
   </div>
 
-  <!-- Envelope -->
   <div class="envelope" onclick="openEnvelope(this)">
     <div class="flap"></div>
     Click To Open
